@@ -6,7 +6,7 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
 
-const ShopifyApplePay = NativeModules.ShopifyApplePay
+const ShopifyApplePay: ApplePayModule = NativeModules.ShopifyApplePay
   ? NativeModules.ShopifyApplePay
   : new Proxy(
       {},
@@ -17,6 +17,6 @@ const ShopifyApplePay = NativeModules.ShopifyApplePay
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return ShopifyApplePay.multiply(a, b);
+export function runApplePay(checkoutData: CheckoutConfig): Promise<number> {
+  return ShopifyApplePay.runApplePay(checkoutData);
 }
