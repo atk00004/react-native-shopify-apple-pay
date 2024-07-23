@@ -49,6 +49,8 @@ class ShopifyApplePay: NSObject {
                 return
             }
             
+            paymentVC.delegate = self
+            
             rootViewController.present(paymentVC, animated: true, completion: nil)
             
 //            self.paymentCompletion = { success in
@@ -72,17 +74,16 @@ class ShopifyApplePay: NSObject {
 
 
 // ----------------------------------
-//  MARK: - PaySessionDelegate -
+//  MARK: - PKPaymentAuthorizationViewControllerDelegate -
 //
+
 extension ShopifyApplePay: PKPaymentAuthorizationViewControllerDelegate {
-    private func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
+    @objc func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
         // Xử lý thanh toán thành công
         completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
-        controller.dismiss(animated: true, completion: nil)
     }
     
-    func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
+    @objc func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
         controller.dismiss(animated: true, completion: nil)
     }
 }
-
