@@ -3,11 +3,14 @@ interface CheckoutConfig {
   companyName: string;
   currencyCode: string;
   countryCode: string;
-  shippingMethods: [];
-  discount: number;
-  tax: number;
-  subTotal: number;
-  total: number;
+  shopDomain: string;
+  apiKey: string;
+  lineItems: LineItem[];
+}
+
+interface LineItem {
+  quantity: number;
+  variantId: string;
 }
 
 interface ApplePayModule {

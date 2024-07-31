@@ -5,13 +5,16 @@ import { runApplePay } from 'react-native-shopify-apple-pay';
 const checkoutConfig: CheckoutConfig = {
   currencyCode: 'USD',
   countryCode: 'US',
-  discount: 5,
-  merchantID: 'sandbox_rzqjhfv6_mxtqjkx82q8zy799',
+  merchantID: 'merchant.com.jmango360.bigcommerce.v5',
   companyName: 'Anh Hùng đẹp trai',
-  subTotal: 20,
-  tax: 4,
-  total: 20,
-  shippingMethods: [],
+  shopDomain: '0e58bd-74.myshopify.com',
+  apiKey: '7f4d80d5f94673e8f78e2fc17633b93a',
+  lineItems: [
+    {
+      quantity: 1,
+      variantId: 'gid://shopify/ProductVariant/46124368625896',
+    },
+  ],
 };
 export default function App() {
   const onPress = useCallback(() => {
