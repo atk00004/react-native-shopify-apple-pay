@@ -20,7 +20,7 @@ class ShopifyApplePay: NSObject {
 //        let discountItem = PKPaymentSummaryItem(label: "Discount", amount: discount)
         let taxItem = PKPaymentSummaryItem(label: "Tax", amount: totalTax)
         let subTotalItem = PKPaymentSummaryItem(label: "Sub Total", amount: subtotalPrice)
-        let totalItem = PKPaymentSummaryItem(label: companyName, amount: totalPrice)
+        let totalItem = PKPaymentSummaryItem(label: companyName, amount: NSDecimalNumber(string:"8.49"))
         
         let paymentRequest = PKPaymentRequest()
         paymentRequest.merchantIdentifier = configData["merchantID"] as! String
@@ -165,9 +165,11 @@ extension ShopifyApplePay: PKPaymentAuthorizationViewControllerDelegate {
                     self.availableShippingRates = availableShippingRates
                     
                     var shippingMethods: [PKShippingMethod] = []
-                    for item in availableShippingRates! {
-                        let method = PKShippingMethod.init(label: item.title, amount: NSDecimalNumber(decimal: item.price.amount))
-                        shippingMethods.append(method)
+                    if (availableShippingRates != nil) {
+                        for item in availableShippingRates! {
+                            let method = PKShippingMethod.init(label: item.title, amount: NSDecimalNumber(decimal: item.price.amount))
+                            shippingMethods.append(method)
+                        }
                     }
                     let update: PKPaymentRequestShippingContactUpdate = PKPaymentRequestShippingContactUpdate.init(errors: nil, paymentSummaryItems: [], shippingMethods: shippingMethods)
                     completion(update)
@@ -180,7 +182,7 @@ extension ShopifyApplePay: PKPaymentAuthorizationViewControllerDelegate {
         
         //TODO
         
-        let shippingRate = PayShippingRate(handle: "shopify-Economy-0.00", title: shippingMethod.label, price: shippingMethod.amount as Decimal)
+        let shippingRate = PayShippingRate(handle: "shopify-Economy-7.49", title: shippingMethod.label, price: shippingMethod.amount as Decimal)
         
         self.client?.updateShippingRate((self.checkout?.id.rawValue)!, updatingShippingRate: shippingRate) {
             checkout in

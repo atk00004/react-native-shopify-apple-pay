@@ -12,7 +12,7 @@ const checkoutConfig: CheckoutConfig = {
   lineItems: [
     {
       quantity: 1,
-      variantId: 'gid://shopify/ProductVariant/46124368625896',
+      variantId: 'gid://shopify/ProductVariant/46124337627368',
     },
   ],
 };
